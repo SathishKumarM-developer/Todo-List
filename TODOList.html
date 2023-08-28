@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../Bootstrap/css/bootstrap.css">
+        <style>
+            body{
+                margin: 0%;
+                background-color: cornflowerblue;
+            }
+            h1{
+                text-align: center;
+                color: green;
+               
+            }
+            div{
+                margin: 16px;
+                padding: 8px;
+                background-color:#04041c;
+                box-shadow: 2px 5px 5px rgba(0,0,0,0.7);
+                text-align: center;
+                border: none;
+                border-radius: 30px;
+            }
+            #container{
+                margin: 25px;
+                padding: 25px;
+                color: blueviolet;
+                box-shadow:2px 5px 5px rgba(0,0,0,0.7);
+                border:none;
+            border-radius:25px;
+            text-align: center;
+            }
+            
+        #button{
+            border:none;
+            border-radius: 8px;
+            background-color: #b4b3d8;
+        }
+        #todolist{
+            color:black;
+            background-color:whitesmoke;
+            border:none;
+            border-left:2px solid#616091;
+            border-bottom:1px solid #616091;
+            border-radius: 5px;
+            
+        }
+        #date{
+            color:black;
+            background-color:whitesmoke;
+            border:none;
+            border-left:2px solid#616091;
+            border-bottom:1px solid #616091;
+            border-radius: 5px;
+        }
+        #list{
+                
+                color: blueviolet;
+                text-align: center;
+        }
+        label{
+            color: aquamarine;
+        }
+        
+        </style>
+    </head>
+    <body>
+        <div>
+        <h1>TO DO LIST</h1>
+    </div>
+        <div id="container">
+        <input  id="todolist" placeholder="Add a task"> &nbsp;<button type="button" id="button" >Add ToDo</button> 
+        &nbsp;<br><br>
+        <label for="">Pick a start date to get Target date</label> 
+        <br>
+        <input type="date" id="date"><br><br>
+        <ol id="list">
+            
+
+        </ol> 
+        
+    </div>
+    
+       <script>
+           var button= document.getElementById('button')
+           button.addEventListener('click', todolist)
+           function todolist(){
+            let item = document.getElementById('todolist').value
+            if (item===""){
+                emptyalert();
+                return;
+            }
+            var date = new Date();
+            console.log(date.getDate())
+            let field = document.getElementById('date')
+            const startdate = new Date(field.valueAsDate)
+            if(startdate.getDate()>=date.getDate())
+            {
+                startdate.setDate(startdate.getDate()+4)
+                const newdate=startdate.toISOString().slice(0,10)
+                console.log(newdate)
+                
+            }else {
+                datealert();
+                return 
+                console.log("Please select the current date or above it")
+                      
+            }
+            var text = document.createTextNode(item)
+            var newitem = document.createElement('li')
+            newitem.appendChild(text)
+            var listt= document.getElementById('list')
+            listt.appendChild(newitem)
+            let btn=document.createElement('button');
+            btn.value='Done';
+            btn.innerText="Done";
+            let btn1=document.createElement('button');
+            btn1.value='delete';
+            btn1.innerText="Delete";
+            newitem.appendChild(btn)
+            newitem.appendChild(btn1)
+            function emptyalert()
+            {
+               alert("Please enter a Task")
+            }
+            
+            
+            
+
+            //date setting
+
+            
+           function datealert(){
+                alert("Please select the current date or above it")
+            }
+            
+            
+
+            var x = document.createElement("INPUT");
+            x.setAttribute("type", "date");
+            const newdate=startdate.toISOString().slice(0,10)
+            console.log(newdate)
+            x.value=newdate
+            newitem.appendChild(x);
+    
+            //Done & delete action
+            btn.addEventListener("click",Done)
+            function Done() {
+                newitem.style.color="green"
+                btn.disabled= true
+            }
+            btn1.addEventListener("click",Delete)
+            function Delete() {
+                
+                newitem.style.textDecoration="line-through";
+
+            }
+
+            //Styling elements
+            newitem.style.padding='3px';
+            newitem.style.marginLeft='1%';
+            btn.style.border='none';
+            btn.style.marginLeft="3%";
+            btn.style.borderRadius="8px";
+            btn.style.backgroundColor="#b4b3d8";
+            btn1.style.marginLeft="2px";
+            btn1.style.borderRadius="8px";
+            btn1.style.backgroundColor="#b4b3d8";
+            btn1.style.border="none";
+            x.style.border='none';
+            x.style.marginLeft="2px";
+            x.style.borderRadius="8px";
+            x.style.backgroundColor="#b4b3d8";
+ }
+                  
+        </script>
+    </body>
+</html>
